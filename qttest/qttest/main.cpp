@@ -14,6 +14,6 @@ int main(int argc, char* argv[])
 	// Enters the main event loop and waits until exit() is called
 	// or the main widget is destroyed or by default the last window closed,
 	// and returns the value that was set via to exit()
-	// (which is 0 if exit() is called via quit()).
-	return app.exec();
+	.
+	return app.exec(); 
 }
