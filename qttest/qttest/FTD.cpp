@@ -16,18 +16,7 @@ stopThread(0)
 		std::cout<<"done"<<std::endl;
 	else
 		std::cout<<"error"<<std::endl;
-	//FT_Open=(FT_OpenProto) lib->resolve("FT_Open");
-	//FT_ListDevices=(FT_ListDevicesProto) lib->resolve("FT_ListDevices");
-	//FT_Close=(FT_CloseProto) lib->resolve("FT_Close");
-	//
-	//FT_SetRts=(FT_SetRtsProto) lib->resolve("FT_SetRts");
-	//FT_ClrRts=(FT_ClrRtsProto) lib->resolve("FT_ClrRts");
-
-	//FT_Write=(FT_WriteProto) lib->resolve("FT_Write");
-	//FT_Read=(FT_ReadProto) lib->resolve("FT_Read");
-	//FT_SetBitmode=(FT_SetBitmodeProto) lib->resolve("FT_SetBitmode");
-	//FT_GetBitmode=(FT_GetBitmodeProto) lib->resolve("FT_GetBitmode");
-
+	
 	txbuffer=new unsigned char [buffersize];
 	rxbuffer=new unsigned char [buffersize];
 	threadBuffer=new unsigned char [buffersize];
@@ -39,6 +28,10 @@ stopThread(0)
 	ftStatus = FT_ListDevices(p1, NULL, FT_LIST_NUMBER_ONLY);
 	a_numDevices=numDevs;
 	//ftStatus = FT_Open(a_tagetDevice, &handle);
+
+	//a_timer->setSingleShot(true);
+	
+	
 
 }
 
@@ -53,13 +46,14 @@ FTD::~FTD()
 	delete rxbuffer;
 	delete threadBuffer;
 
+
 }
 
 //Rts High, Thread Stoppen, Verbindung beenden 
 void FTD::close(void)
 {
 
-	FT_ClrRts(handle);
+	FT_ClrRts(handle); //Sendet StandBy an WifiModul
 
 
 	FT_Close(handle);
@@ -86,15 +80,12 @@ void FTD::open(void)
 		//Sleep(200);
 
 
-		FT_ClrRts(handle);//für dennn fall das Programm vorher unerwartet vendet wurde und RTS schon low ist
+		FT_ClrRts(handle);//für dennn fall das Programm vorher unerwartet Beendet wurde und RTS schon low ist
 		Sleep(100);
-		FT_SetRts(handle);
-
+		FT_SetRts(handle); //Sendet "Return from Standby" an WiFi modul
 		ftStatus =FT_SetDataCharacteristics(handle,a_bits,0,0);
 		ftStatus = FT_SetBaudRate(handle, a_baud);
-
 	}
-
 	Sleep(10);
 
 }
@@ -294,12 +285,22 @@ bool FTD::setBaudRFC(int p_baud)
 	//sende RFC Befehl
 
 	int num=0;
-	while (!num)
+	
+	QTime t;
+	t.start();
+	
+
+ 	while (!num) 
 	{
 		this->sendData(txbuffer,10);
-		//Thread::Sleep(200);
+		Sleep(200);
 		//Lies Antwort
 		num=this->recvData(rxbuffer,10);
+		if(t.elapsed()>5000) 
+			return 0;
+		 
+
+		
 	}
 
 
@@ -319,6 +320,7 @@ bool FTD::setBaudRFC(int p_baud)
 		}
 	}
 	//if(num!=10) return 0;
+	Sleep(200);
 	a_recvCnt=0;
 	return 1; //befehl übermittelt und korrekt beantwortet
 }

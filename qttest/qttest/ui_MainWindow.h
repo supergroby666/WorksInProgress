@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'MainWindow.ui'
 **
-** Created: Wed 20. Jun 11:27:20 2012
+** Created: Thu 21. Jun 08:12:56 2012
 **      by: Qt User Interface Compiler version 4.8.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -187,6 +187,7 @@ public:
         menuOptions->addAction(action_Beenden);
 
         retranslateUi(MainWindow);
+        QObject::connect(action_Beenden, SIGNAL(triggered()), MainWindow, SLOT(close()));
 
         comboBox_2->setCurrentIndex(0);
 

@@ -7,7 +7,7 @@
 #include <iostream>
 #define buffersize (2048*2)
 #define readLength (32)
-
+ #include <Qt/Qdatetime.h>
 
 
 //Klasse zum dierkt auslesen des FTDI-Chips
@@ -171,11 +171,15 @@ enum {
 		QLibrary* lib;
 		FT_HANDLE handle;
 		int testCnt;
+		//QTimer * a_timer;
+	
 
 
 public slots:
     void process();
 
+
+	
  
 
 signals:

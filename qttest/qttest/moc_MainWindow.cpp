@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'MainWindow.h'
 **
-** Created: Wed 20. Jun 11:40:37 2012
+** Created: Thu 21. Jun 08:16:35 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      17,   14, // methods
+      18,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -40,14 +40,15 @@ static const uint qt_meta_data_MainWindow[] = {
       86,   39,   11,   11, 0x09,
       97,   11,   11,   11, 0x09,
      111,   11,   11,   11, 0x09,
-     119,   25,   11,   11, 0x09,
-     129,   25,   11,   11, 0x09,
-     139,   25,   11,   11, 0x09,
-     149,   25,   11,   11, 0x09,
-     159,   25,   11,   11, 0x09,
-     169,   25,   11,   11, 0x09,
-     179,   11,   11,   11, 0x09,
-     189,   11,   11,   11, 0x09,
+     125,   25,   11,   11, 0x09,
+     135,   11,   11,   11, 0x09,
+     142,   25,   11,   11, 0x09,
+     152,   25,   11,   11, 0x09,
+     162,   25,   11,   11, 0x09,
+     172,   25,   11,   11, 0x09,
+     182,   25,   11,   11, 0x09,
+     192,   11,   11,   11, 0x09,
+     202,   11,   11,   11, 0x09,
 
        0        // eod
 };
@@ -56,9 +57,9 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "MainWindow\0\0opendevice()\0val\0RFC(bool)\0"
     "index\0selectDevice(int)\0Header()\0"
     "Vars()\0data()\0speed(int)\0DataatSpeed()\0"
-    "close()\0RTS(bool)\0CB0(bool)\0CB1(bool)\0"
-    "CB2(bool)\0CB3(bool)\0SPI(bool)\0SendSpi()\0"
-    "CleanSpiText()\0"
+    "closeDevice()\0RTS(bool)\0Info()\0CB0(bool)\0"
+    "CB1(bool)\0CB2(bool)\0CB3(bool)\0SPI(bool)\0"
+    "SendSpi()\0CleanSpiText()\0"
 };
 
 void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -75,15 +76,16 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 5: _t->data(); break;
         case 6: _t->speed((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 7: _t->DataatSpeed(); break;
-        case 8: _t->close(); break;
+        case 8: _t->closeDevice(); break;
         case 9: _t->RTS((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 10: _t->CB0((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 11: _t->CB1((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 12: _t->CB2((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 13: _t->CB3((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 14: _t->SPI((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 15: _t->SendSpi(); break;
-        case 16: _t->CleanSpiText(); break;
+        case 10: _t->Info(); break;
+        case 11: _t->CB0((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 12: _t->CB1((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 13: _t->CB2((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 14: _t->CB3((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 15: _t->SPI((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 16: _t->SendSpi(); break;
+        case 17: _t->CleanSpiText(); break;
         default: ;
         }
     }
@@ -123,9 +125,9 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 17)
+        if (_id < 18)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 17;
+        _id -= 18;
     }
     return _id;
 }

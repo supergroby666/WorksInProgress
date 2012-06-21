@@ -15,12 +15,12 @@ a_speed(9600)
 	connect(pushButton_3, SIGNAL(clicked()), this, SLOT(Vars()));
 	connect(pushButton_4, SIGNAL(clicked()), this, SLOT(data()));
 	connect(pushButton_5, SIGNAL(clicked()), this, SLOT(DataatSpeed()));
-	connect(pushButton_6, SIGNAL(clicked()), this, SLOT(close()));
+	connect(pushButton_6, SIGNAL(clicked()), this, SLOT(closeDevice()));
 	connect(comboBox_2, SIGNAL(currentIndexChanged ( int )), this, SLOT(selectDevice(int)));
 	connect(comboBox, SIGNAL(currentIndexChanged( int )), this, SLOT(speed(int)));
 	connect(checkBox, SIGNAL(toggled(bool)), this, SLOT(RFC(bool)));
 	connect(RTSSet, SIGNAL(toggled(bool)), this, SLOT(RTS(bool)));
-
+	connect(actionInfo, SIGNAL(triggered()), this, SLOT(Info()));
 	connect(CBus0, SIGNAL(toggled(bool)), this, SLOT(CB0(bool)));
 	connect(CBus1, SIGNAL(toggled(bool)), this, SLOT(CB1(bool)));
 	connect(CBus2, SIGNAL(toggled(bool)), this, SLOT(CB2(bool)));
@@ -127,7 +127,18 @@ void MainWindow::opendevice()
 	{
 		textEdit->setText("Searching RFC counterpart!!");
 		master->setBaud(115200,0);
-		while(!master->setBaudRFC(9600));
+		QTime t;
+		t.start();
+		
+		while(!master->setBaudRFC(9600))
+		{
+
+			if(t.elapsed()>10000) 
+			{
+				textEdit->setText("TimeOut!!!");
+				return;
+			}
+		}
 		textEdit->setText("Open");
 	}
 	comboBox_2->setEnabled(false);
@@ -158,7 +169,7 @@ void MainWindow::opendevice()
 }
 
 
-void MainWindow::close()
+void MainWindow::closeDevice()
 {
 
 	//
@@ -209,6 +220,7 @@ void MainWindow::Header()
 	textEdit->setText("Header: \n");
 	if(useRFC)
 	{
+		
 
 		sBuf[0]=0x80;
 		sBuf[1]=0x00;
@@ -855,5 +867,13 @@ void MainWindow::CleanSpiText()
 
 	}
 
+
+}
+
+void MainWindow::Info()
+{
+ QMessageBox msgBox;
+ msgBox.setText("TestTool zum direkten Ansprechen eines FTDI-Chips mit D2XX Treibern.\n Zusätzlich Kommunikation mit RFC-Clients möglich.");
+ msgBox.exec();
 
 }

@@ -6,6 +6,8 @@
 #include <Qt/Qtextstream.h>
 #include <Qt/QThread.h>
 #include <Qt/qregexp.h>
+ #include <Qt/QTimer.h>
+ #include <Qt/QMessageBox.h>
 
 /**
 * Sample MainWindow Class
@@ -51,9 +53,9 @@ private:
 		void data();
 		void speed(int index);
 		void DataatSpeed();
-		void close();
+		void closeDevice();
 		void RTS(bool val);
-
+		void Info();
 		void CB0(bool val);
 		void CB1(bool val);
 		void CB2(bool val);
